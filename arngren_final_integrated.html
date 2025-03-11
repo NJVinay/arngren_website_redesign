@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Arngren Modern Redesign</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #a1c4fd, #c2e9fb, #fbc2eb, #a18cd1);
+      background-size: 200% 200%;
+      animation: gradient 10s ease infinite;
+    }
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      position: relative;
+      height: 100%; /* Make all cards the same height */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* Push content to top and button to bottom */
+      padding: 16px;
+      box-sizing: border-box;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+    }
+    .card img { 
+      transition: transform 0.3s ease;
+      height: 180px; /* Fixed height */
+      width: 100%;
+      object-fit: contain; /* Adjust image without distortion */
+      margin-bottom: 16px;
+    }
+    .card:hover img { transform: scale(1.1); 
+    }
+    .card-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .btn-primary {
+      background-image: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      background-image: linear-gradient(to right, #764ba2, #667eea);
+    }
+    .nav-link:hover {color:#2563eb;}
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.4);
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      border-radius: 20px;
+    }
+    
+  </style>
+</head>
+<body class="text-gray-800">
+<header class="sticky-nav shadow p-4 w-full">
+  <div class="container mx-auto flex justify-between items-center">
+    <h1 class="text-3xl font-bold text-blue-500">Arngren.net</h1>
+    <nav class="space-x-4 flex items-center">
+      <div class="relative group">
+        <a href="vehicles.html" class="nav-link px-3">Vehicles</a>
+        <div class="absolute hidden group-hover:block bg-white shadow rounded p-2 space-y-1 z-50">
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100">Electric Scooters</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100">ATVs</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100">Bikes</a>
+        </div>
+      </div>
+      <div class="relative group">
+        <a href="electronics.html" class="nav-link px-3">Electronics & Gadgets</a>
+        <div class="absolute hidden group-hover:block bg-white shadow rounded p-2 space-y-1 z-50">
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100">Drones</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100">Chargers</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100">Robots</a>
+        </div>
+      </div>
+      <a href="toys_sports.html" class="nav-link px-3">Toys & Sports</a>
+      <a href="contact.html" class="nav-link px-3">Contact</a>
+      <a href="cart.html" class="nav-link px-3">Cart 🛒</a>
+    </nav>
+
+    <input type="text" id="searchInput" placeholder="Search products..."
+      class="px-4 py-2 rounded border border-gray-300 ml-4">
+  </div>
+</header>
+
+<section class="container mx-auto p-6">
+  <h2 class="text-4xl font-bold mb-6 text-center">Featured Products</h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div class="card bg-white rounded-lg shadow-lg p-4 text-center cursor-pointer">🛵<br>Electric Scooter</div>
+    <div class="card bg-white rounded-lg shadow-lg p-4 text-center cursor-pointer">📸<br>Drone Camera</div>
+    <div class="card bg-white rounded-lg shadow-lg p-4 text-center cursor-pointer">🏍️<br>ATV Vehicle</div>
+    <div class="card bg-white rounded-lg shadow-lg p-4 text-center cursor-pointer">🚗<br>Remote-Control Car</div>
+  </div>
+</section>
+
+<!-- Hero Banner Section -->
+<section class="relative bg-cover bg-center h-[80vh] text-white" style="background-image: url('images/arngrenbanner.webp');">
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+  <div class="relative z-10 flex flex-col justify-center items-center h-full text-center px-4">
+    <h1 class="text-4xl font-bold mb-4 drop-shadow-lg">Discover the Future of Mobility</h1>
+    <p class="text-xl mb-8 drop-shadow-lg">Eco-friendly electric vehicles, drones & more. Explore now.</p>
+    <a href="vehicles.html" class="btn-primary px-8 py-3 rounded-full font-semibold text-lg shadow-lg">Explore Products</a>
+  </div>
+</section>
+
+<!-- Styling for the Button (reusable btn-primary class already in your CSS) -->
+<style>
+  .btn-primary {
+    background-image: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background-image: linear-gradient(to right, #764ba2, #667eea);
+  }
+
+  /* Sticky navbar look */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Search bar look */
+  input[type="text"] {
+    transition: box-shadow 0.3s ease;
+  }
+
+  input[type="text"]:focus {
+    box-shadow: 0 0 0 3px rgba(100, 149, 237, 0.5);
+  }
+
+</style>
+
+<section class="container mx-auto p-6">
+  <h2 class="text-4xl font-bold mb-10 text-center">All Products</h2>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\efatbike.webp" class="rounded mb-3">
+      <div class="card-content">
+        <h3 class="font-semibold mb-3">Electric Fatbike</h3>
+        <a href="product.html?id=electric_fatbike" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>    
+      </div>
+    </div>
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\efatbikefold.webp" class="rounded mb-3">
+      <h3 class="font-semibold">Electric Fatbike Folding</h3>
+      <a href="product.html?id=electric_fatbike_folding" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\escooter.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Electric Scooter</h3>
+      <a href="product.html?id=electric_scooter" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\3wheelcargo.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">3-wheel Electric Cargo Bike</h3>
+      <a href="product.html?id=electric_cargo_bike" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\atv.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Electric ATV Vehicle</h3>
+      <a href="product.html?id=atv_vehicle" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\eatvchild.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Electric ATV for Children & Adults</h3>
+      <a href="product.html?id=electric_atv_kids" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\4wdlandrover.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">4WD Land Rover</h3>
+      <a href="product.html?id=4wd_land_rover" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\ebike.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Electric Bike</h3>
+      <a href="product.html?id=electric_bike" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\ecarkids.webp" class="rounded mb-3">
+      <h3 class="font-semibold">Electric Cars for Kids</h3>
+      <a href="product.html?id=electric_cars_kids" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\emopedcar.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Electric Moped Car</h3>
+      <a href="product.html?id=electric_moped_car" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\ewillysjeep.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Electric Jeep Willy-Type</h3>
+      <a href="product.html?id=jeep_willy_type" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\e3seaterjeep.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Electric Jeep, 3-seater</h3>
+      <a href="product.html?id=jeep_3seater" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\ecrossridercar.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Electric Car Cross-Rider</h3>
+      <a href="product.html?id=cross_rider_car" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\dronecam.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Drone Camera</h3>
+      <a href="product.html?id=drone_camera" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\rcracingcars.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Remote-Control Cars</h3>
+      <a href="product.html?id=remote_control_cars" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\rctank.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">RC Tank</h3>
+      <a href="product.html?id=rc_tank" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\solarpowerproducts.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Solar-powered Products</h3>
+      <a href="product.html?id=solar_products" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\batterieschargers.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Batteries & Chargers</h3>
+      <a href="product.html?id=batteries_chargers" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\billiardstable.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Billiard Table</h3>
+      <a href="product.html?id=billiard_table" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\lawnmower.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Lawn Mower</h3>
+      <a href="product.html?id=lawn_mower" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\compass.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Compass</h3>
+      <a href="product.html?id=compass" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\alarmsystems.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Alarm Systems</h3>
+      <a href="product.html?id=alarm_systems" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\aquaequipment.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Aquarium Equipment</h3>
+      <a href="product.html?id=aquarium_equipment" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\digiclock.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Digital Clock</h3>
+      <a href="product.html?id=digital_clock" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\discolights.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Disco Lights</h3>
+      <a href="product.html?id=disco_lights" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\dvdplayer.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">DVD Player</h3>
+      <a href="product.html?id=dvd_player" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\robo.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Robots</h3>
+      <a href="product.html?id=robots" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+    <div class="card bg-white rounded shadow p-4 text-center">
+      <img src="images\christmastree.jpeg" class="rounded mb-3">
+      <h3 class="font-semibold">Christmas Tree</h3>
+      <a href="product.html?id=christmas_tree" class="btn-primary px-4 py-2 rounded-full font-semibold">View Product</a>
+    </div>
+    
+  </div>
+</section>
+
+<footer class="bg-gray-800 text-gray-300 text-center py-6">
+  © 2025 Arngren.net | All Rights Reserved
+</footer>
+</body>
+</html>
+
+
+<script>
+  document.getElementById('searchInput').addEventListener('input', function (e) {
+    const searchValue = e.target.value.toLowerCase();
+    const products = document.querySelectorAll('.product-card');
+
+    products.forEach(card => {
+      const name = card.querySelector('h3').innerText.toLowerCase();
+      card.style.display = name.includes(searchValue) ? 'block' : 'none';
+    });
+  });
+</script>

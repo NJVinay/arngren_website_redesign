@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details - Arngren</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb, #fbc2eb, #a18cd1);
+            background-size: 200% 200%;
+            animation: gradient 10s ease infinite;
+        }
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        @media (min-width: 768px) {
+            main {
+                display: flex;
+                flex-wrap: wrap; /* Makes it responsive */
+                gap: 2rem;
+                align-items: flex-start; /* Align image and text top */
+                justify-content: center; /* Center contents if space allows */
+            }
+            main img {
+                width: 100%; /* Full width on small screens */
+                max-width: 400px; /* Limit size on larger screens */
+                height: auto; /* Maintain aspect ratio */
+                object-fit: cover; /* Ensures image doesn't stretch */
+                border-radius: 12px; /* Optional: smooth corners */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+            }
+            main .details {
+                flex: 1 1 400px; /* Makes text area flexible but not too small */
+                max-width: 600px; /* Optional: limit width for better reading */
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-white shadow p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-blue-500"><a href="arngren_final_integrated.html">Arngren.net</a></h1>
+            <nav class="space-x-4">
+                <a href="arngren_final_integrated.html" class="nav-link">Home</a>
+                <a href="vehicles.html" class="nav-link">Vehicles</a>
+                <a href="electronics.html" class="nav-link">Electronics & Gadgets</a>
+                <a href="toys_sports.html" class="nav-link">Toys & Sports</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+        </div>
+    </header>
+    <main class="container mx-auto p-8">
+        <img id="product-image" src="" alt="Product Image" class="w-full max-w-md rounded shadow mb-6">
+
+        <div class="details">
+            <h1 id="product-name" class="text-4xl font-bold mb-4">Loading...</h1>
+            <p id="product-description" class="text-lg mb-4"></p>
+            <!-- New: Feature Section -->
+            <h2 class="text-2xl font-semibold mt-6 mb-2">Key Features:</h2>
+            <div id="product-features" class="mb-6"></div>
+            <!-- New: Usage Section -->
+            <h2 class="text-2xl font-semibold mt-6 mb-2">Why Buy This Product?</h2>
+            <p id="product-usage" class="text-md mb-6"></p>
+            <p id="product-price" class="text-2xl font-semibold mb-4"></p>
+            <a id="buy-button" href="#" class="bg-blue-500 text-white px-6 py-2 rounded shadow">Buy Now</a>
+        </div>
+    </main>
+    <script src="products.js"></script> <!-- Product list -->
+    <script src="product.js"></script> <!-- Page logic -->
+</body>
+</html>
