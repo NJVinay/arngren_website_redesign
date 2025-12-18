@@ -170,7 +170,8 @@ This project is available for educational and personal use.
 
 ## 👤 Author
 
-Arngren Website Redesign Project
+**njvinay**  
+Email: jv5102003@gmail.com
 
 ## 🙏 Acknowledgments
 
