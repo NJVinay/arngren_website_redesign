@@ -1,5 +1,7 @@
 # Arngren Website Redesign
 
+**GitHub Repository**: https://github.com/NJVinay/arngren_website_redesign
+
 A modern redesign of the Arngren e-commerce website featuring a clean, user-friendly interface with improved navigation and shopping experience.
 
 ## 📋 Project Overview
