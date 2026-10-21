@@ -123,6 +123,7 @@ npx http-server
 - **Typography**: Geist for UI and headings, Geist Mono for labels, prices and specs
 - **Structure over decoration**: hairline borders and whitespace instead of gradients and drop shadows
 - **Smart image tiles**: each product image is sampled once — full photos fill their tile, cut-outs sit centred on white
+- **Flowing wave background**: layered canvas waves in lavender, mist, sage, sand and seafoam drift behind every page (half-resolution, ~30fps, paused in hidden tabs). A pause/play button sits bottom-left; visitors with reduced motion enabled start paused and can opt in
 - **Motion**: subtle hover and scroll-reveal transitions, disabled under `prefers-reduced-motion`
 
 ## 🔧 Customization

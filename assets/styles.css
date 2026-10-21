@@ -572,3 +572,27 @@ main { flex: 1; width: 100%; }
 /* Some cut-outs sit on #f9f9f9 rather than pure white; lift them to blend with the tile */
 :is(.media, .pdp-media, .thumb):not(.is-photo) img { filter: brightness(1.03); }
 @media (max-width: 640px) { .announce-extra { display: none; } }
+
+/* ---------- Flowing wave background ---------- */
+
+.bg-waves {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+.wave-toggle {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 60;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--ink-2);
+}
+.wave-toggle .icon { width: 14px; height: 14px; }

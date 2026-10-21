@@ -42,6 +42,8 @@ const ICONS = {
   plus: '<path d="M12 5v14"/><path d="M5 12h14"/>',
   minus: '<path d="M5 12h14"/>',
   check: '<path d="M20 6 9 17l-5-5"/>',
+  pause: '<rect x="7" y="5" width="3" height="14" rx="1"/><rect x="14" y="5" width="3" height="14" rx="1"/>',
+  play: '<path d="M7 5.5v13a1 1 0 0 0 1.5.9l10.4-6.5a1 1 0 0 0 0-1.8L8.5 4.6A1 1 0 0 0 7 5.5Z"/>',
   truck: '<path d="M14 18V6a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.6a1 1 0 0 0-.2-.6l-3.5-4.4a1 1 0 0 0-.8-.4H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>',
   leaf: '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12"/>',
   shield: '<path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/>',
@@ -363,6 +365,137 @@ new MutationObserver(mutations => {
   }));
 }).observe(document.documentElement, { childList: true, subtree: true });
 
+// ---------- Flowing wave background ----------
+// Soft layered waves on a fixed canvas behind every page. Drawn at half
+// resolution (the upscale softens the edges), throttled to ~30fps and paused
+// while the tab is hidden. Visitors who prefer reduced motion start paused but
+// can press play; an explicit choice is remembered either way.
+
+const WAVE_KEY = 'waves-paused';
+const WAVE_BANDS = [
+  // colour, base height (fraction of viewport), amplitude, wavelength, speed, alpha
+  { color: [214, 204, 236], base: 0.30, amp: 0.050, len: 1.25, speed: 0.10, alpha: 0.55 },
+  { color: [196, 220, 236], base: 0.46, amp: 0.060, len: 0.95, speed: -0.14, alpha: 0.55 },
+  { color: [204, 229, 210], base: 0.60, amp: 0.045, len: 1.10, speed: 0.17, alpha: 0.60 },
+  { color: [242, 221, 202], base: 0.74, amp: 0.055, len: 0.85, speed: -0.12, alpha: 0.55 },
+  { color: [190, 226, 220], base: 0.87, amp: 0.040, len: 1.35, speed: 0.20, alpha: 0.55 }
+];
+const WAVE_LINES = [0.38, 0.53, 0.67, 0.81];
+
+function initWaves() {
+  const canvas = document.createElement('canvas');
+  canvas.className = 'bg-waves';
+  canvas.setAttribute('aria-hidden', 'true');
+  document.body.prepend(canvas);
+  const ctx = canvas.getContext('2d');
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let stored = null;
+  try { stored = localStorage.getItem(WAVE_KEY); } catch (e) {}
+  let paused = stored === null ? reduceMotion.matches : stored === '1';
+
+  const SCALE = 0.5;
+  let W = 0, H = 0, raf = 0, last = 0, t = 0;
+
+  function resize() {
+    W = Math.ceil(window.innerWidth * SCALE);
+    H = Math.ceil(window.innerHeight * SCALE);
+    canvas.width = W;
+    canvas.height = H;
+    draw();
+  }
+
+  // Sum of two sines gives an organic, non-repeating-looking crest
+  function crest(x, i, band) {
+    const k = (Math.PI * 2) / (W * band.len);
+    const breathe = 0.82 + 0.18 * Math.sin(t * 0.25 + i * 1.7);
+    return H * band.base
+      + H * band.amp * breathe * Math.sin(x * k + t * band.speed * 6 + i * 2.1)
+      + H * band.amp * 0.45 * Math.sin(x * k * 2.3 - t * band.speed * 4 + i);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const step = Math.max(4, Math.round(W / 160));
+
+    WAVE_BANDS.forEach((band, i) => {
+      const [r, g, b] = band.color;
+      const top = H * (band.base - band.amp * 1.6);
+      const grad = ctx.createLinearGradient(0, top, 0, H);
+      grad.addColorStop(0, `rgba(${r},${g},${b},${band.alpha})`);
+      grad.addColorStop(1, `rgba(${r},${g},${b},${band.alpha * 0.35})`);
+
+      ctx.beginPath();
+      ctx.moveTo(0, H);
+      for (let x = 0; x <= W + step; x += step) ctx.lineTo(x, crest(x, i, band));
+      ctx.lineTo(W, H);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+    });
+
+    // Fine contour lines drifting between the bands
+    ctx.lineWidth = 1;
+    WAVE_LINES.forEach((base, i) => {
+      const band = { base, amp: 0.035, len: 0.8 + i * 0.22, speed: i % 2 ? 0.09 : -0.08 };
+      ctx.strokeStyle = `rgba(17, 17, 16, ${0.07 - i * 0.01})`;
+      ctx.beginPath();
+      for (let x = 0; x <= W + step; x += step) {
+        const y = crest(x, i + 3, band);
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    });
+  }
+
+  function frame(now) {
+    raf = requestAnimationFrame(frame);
+    if (now - last < 33) return; // ~30fps is plenty for slow motion
+    t += Math.min(now - last, 100) / 1000;
+    last = now;
+    draw();
+  }
+
+  function running() { return !paused && !document.hidden; }
+
+  function sync() {
+    cancelAnimationFrame(raf);
+    raf = 0;
+    if (running()) {
+      last = performance.now();
+      raf = requestAnimationFrame(frame);
+    } else {
+      draw();
+    }
+    toggle.innerHTML = icon(paused ? 'play' : 'pause');
+    toggle.setAttribute('aria-label', paused ? 'Play background animation' : 'Pause background animation');
+    toggle.setAttribute('aria-pressed', paused);
+  }
+
+  const toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'icon-btn wave-toggle';
+  toggle.addEventListener('click', () => {
+    paused = !paused;
+    try { localStorage.setItem(WAVE_KEY, paused ? '1' : '0'); } catch (e) {}
+    sync();
+  });
+  document.body.appendChild(toggle);
+
+  let resizeTimer;
+  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 120); });
+  document.addEventListener('visibilitychange', sync);
+  reduceMotion.addEventListener?.('change', () => {
+    let choice = null;
+    try { choice = localStorage.getItem(WAVE_KEY); } catch (e) {}
+    if (choice === null) paused = reduceMotion.matches;
+    sync();
+  });
+
+  resize();
+  sync();
+}
+
 // ---------- Scroll reveal ----------
 
 function initReveal() {
@@ -384,6 +517,7 @@ function initReveal() {
 
 // ---------- Boot ----------
 
+initWaves();
 renderHeader();
 renderFooter();
 hydrateIcons();
