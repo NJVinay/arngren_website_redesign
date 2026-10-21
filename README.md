@@ -10,27 +10,33 @@ This project is a complete redesign of an e-commerce website, transforming it in
 ## ✨ Features
 
 - **Responsive Design**: Fully responsive layout that works seamlessly across all devices
-- **Product Categories**: Organized product catalog including:
-  - Electronics (cameras, drones, projectors, etc.)
-  - Vehicles (ATVs, electric scooters, go-karts, etc.)
-  - Toys & Sports (action figures, gaming consoles, sports equipment, etc.)
+- **Product Categories**: Data-driven catalog pages generated from `products.js`:
+  - Vehicles (e-bikes, scooters, ATVs, electric jeeps and cars)
+  - Electronics & Gadgets (drones, robots, solar products, alarms, etc.)
+  - Toys & Sports (RC cars and tanks, ride-on toys, billiard table)
+  - Home & Garden (lawn mower, aquarium equipment, seasonal decor)
+- **Search, Filter & Sort**: Live search, category filter chips and price/name sorting on the homepage; sorting on every category page
 - **Shopping Cart**: Full-featured cart with:
   - Add/remove items
   - Quantity adjustment
   - Persistent storage using localStorage
-  - Real-time total calculation
+  - Real-time subtotal, shipping and total calculation
+  - Live cart-count badge in the header (synced across tabs)
 - **Product Pages**: Detailed product information with:
   - Product images
   - Comprehensive descriptions
   - Feature lists
   - Usage recommendations
   - Pricing information
+  - Quantity selector, breadcrumbs and related products
 - **Modern UI/UX**:
   - Animated gradient backgrounds
   - Hover effects and smooth transitions
   - Card-based product displays
-  - Clean navigation menu
-- **Contact Form**: Customer inquiry and feedback form
+  - Shared sticky header with a mobile hamburger menu
+  - Toast notifications instead of browser alerts
+  - Respects `prefers-reduced-motion`
+- **Contact Form**: Customer inquiry form with client-side validation (demo only, no messages are sent)
 
 ## 🛠️ Technologies Used
 
@@ -44,14 +50,19 @@ This project is a complete redesign of an e-commerce website, transforming it in
 
 ```
 arngren_website_redesign/
-├── arngren_final_integrated.html  # Main homepage
+├── index.html                     # Homepage (hero, categories, featured, all products)
+├── arngren_final_integrated.html  # Redirect to index.html (keeps old links working)
+├── assets/
+│   ├── site.js                    # Shared header/footer, cart helpers, product cards
+│   └── styles.css                 # Shared styles for every page
 ├── cart.html                      # Shopping cart page
 ├── cart.js                        # Cart functionality
 ├── contact.html                   # Contact form page
 ├── electronics.html               # Electronics category page
+├── home_garden.html               # Home & Garden category page
 ├── product.html                   # Individual product detail page
 ├── product.js                     # Product page functionality
-├── products.js                    # Product data and catalog
+├── products.js                    # Product data, categories and featured list
 ├── toys_sports.html               # Toys & Sports category page
 ├── vehicles.html                  # Vehicles category page
 └── images/                        # Product images directory
@@ -68,7 +79,7 @@ arngren_website_redesign/
 
 1. Clone or download the repository
 2. Navigate to the project directory
-3. Open `arngren_final_integrated.html` in your web browser
+3. Open `index.html` in your web browser
 
 ```bash
 # If using a local server (optional)
@@ -85,25 +96,26 @@ npx http-server
 
 ### Browsing Products
 
-1. Start at the homepage (`arngren_final_integrated.html`)
+1. Start at the homepage (`index.html`)
 2. Navigate through different categories using the navigation menu
 3. Click on product cards to view detailed information
 
 ### Adding to Cart
 
-1. On any product page, click the "Add to Cart" button
-2. View your cart by clicking "View Cart" in the navigation
+1. Click "Add to cart" on any product card, or choose a quantity on a product page
+2. View your cart by clicking "🛒 Cart" in the navigation
 3. Adjust quantities or remove items as needed
 
 ### Product Categories
 
-- **Electronics**: Browse cameras, drones, projectors, and tech gadgets
-- **Vehicles**: Explore ATVs, electric scooters, and go-karts
-- **Toys & Sports**: Find action figures, gaming consoles, and sports equipment
+- **Vehicles**: E-bikes, scooters, ATVs, electric jeeps and cars
+- **Electronics & Gadgets**: Drones, robots, solar products and tech gadgets
+- **Toys & Sports**: RC cars and tanks, ride-on toys and games
+- **Home & Garden**: Garden, aquarium and seasonal products
 
 ### Contact
 
-- Navigate to the contact page to submit inquiries or feedback
+- Navigate to the contact page to fill in the inquiry form or find recycling information
 
 ## 🎨 Design Features
 
@@ -130,9 +142,11 @@ Edit `products.js` and add a new product object:
 }
 ```
 
+Then add the product id to the `items` list of a category in the `categories` object at the bottom of `products.js` — it will appear on the homepage and its category page automatically.
+
 ### Modifying Styles
 
-- Custom styles are located in the `<style>` tag within each HTML file
+- Shared styles live in `assets/styles.css`
 - Tailwind CSS classes can be adjusted directly in the HTML
 - Animation durations and effects can be modified in the CSS
 
@@ -159,7 +173,7 @@ Contributions are welcome! To contribute:
 - [ ] Backend integration for persistent data storage
 - [ ] User authentication and account management
 - [ ] Payment gateway integration
-- [ ] Product search functionality
+- [x] Product search functionality
 - [ ] Product reviews and ratings
 - [ ] Wishlist feature
 - [ ] Order tracking

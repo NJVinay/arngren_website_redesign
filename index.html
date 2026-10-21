@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Arngren.net — electric vehicles, drones, gadgets, toys and hobby products from Oslo, Norway.">
+  <title>Arngren.net - Electric Vehicles, Gadgets & More</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="assets/styles.css" rel="stylesheet">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Discover the Future of Mobility</h1>
+        <p>Eco-friendly electric vehicles, drones, gadgets &amp; more — delivered from Oslo.</p>
+        <div class="hero-actions">
+          <a href="#shop" class="btn-primary btn-lg">Shop all products</a>
+          <a href="vehicles.html" class="btn-ghost">Browse vehicles</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="container mx-auto section">
+      <h2 class="section-title">Shop by Category</h2>
+      <div id="category-tiles" class="category-grid"></div>
+    </section>
+
+    <section class="container mx-auto section">
+      <h2 class="section-title">Featured Products</h2>
+      <div id="featured-grid" class="product-grid"></div>
+    </section>
+
+    <section id="shop" class="container mx-auto section">
+      <h2 class="section-title">All Products</h2>
+      <div class="toolbar">
+        <input type="search" id="searchInput" class="search-input" placeholder="Search products..." aria-label="Search products">
+        <label class="sort">Sort by
+          <select id="sort-select">
+            <option value="default">Featured</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="name">Name</option>
+          </select>
+        </label>
+      </div>
+      <div id="category-chips" class="chips mb-6"></div>
+      <div id="all-grid" class="product-grid"></div>
+      <p id="no-results" class="empty-state panel" hidden>No products match your search.</p>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="products.js"></script>
+  <script src="assets/site.js"></script>
+  <script>
+    // Category tiles
+    document.getElementById('category-tiles').innerHTML = Object.values(categories).map(cat => `
+      <a href="${cat.page}" class="category-tile">
+        <div class="icon">${cat.icon}</div>
+        <h3>${escapeHtml(cat.title)}</h3>
+        <p>${escapeHtml(cat.blurb)}</p>
+        <span class="count">${cat.items.length} products →</span>
+      </a>`).join('');
+
+    renderProductGrid(document.getElementById('featured-grid'), featuredProducts);
+
+    // All products with search, category filter and sorting
+    const allIds = Object.keys(products);
+    const state = { query: '', category: 'all', sort: 'default' };
+
+    const chips = document.getElementById('category-chips');
+    chips.innerHTML = [['all', 'All'], ...Object.entries(categories).map(([k, c]) => [k, c.title])]
+      .map(([key, label]) => `<button type="button" class="chip${key === 'all' ? ' active' : ''}" data-cat="${key}">${escapeHtml(label)}</button>`)
+      .join('');
+
+    function renderAll() {
+      let ids = allIds.filter(id => {
+        const p = products[id];
+        const matchesCat = state.category === 'all' || p.category === state.category;
+        const haystack = `${p.name} ${p.description}`.toLowerCase();
+        return matchesCat && haystack.includes(state.query);
+      });
+      if (state.sort === 'price-asc') ids.sort((a, b) => parsePrice(products[a].price) - parsePrice(products[b].price));
+      if (state.sort === 'price-desc') ids.sort((a, b) => parsePrice(products[b].price) - parsePrice(products[a].price));
+      if (state.sort === 'name') ids.sort((a, b) => products[a].name.localeCompare(products[b].name));
+
+      renderProductGrid(document.getElementById('all-grid'), ids);
+      document.getElementById('no-results').hidden = ids.length > 0;
+    }
+
+    document.getElementById('searchInput').addEventListener('input', e => {
+      state.query = e.target.value.trim().toLowerCase();
+      renderAll();
+    });
+    document.getElementById('sort-select').addEventListener('change', e => {
+      state.sort = e.target.value;
+      renderAll();
+    });
+    chips.addEventListener('click', e => {
+      const chip = e.target.closest('.chip');
+      if (!chip) return;
+      state.category = chip.dataset.cat;
+      chips.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === chip));
+      renderAll();
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>

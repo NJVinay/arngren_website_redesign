@@ -401,3 +401,45 @@ const products = {
     image: "images/robo.jpeg"
   },
 }
+
+// Category metadata used by the navigation, homepage filters and category pages
+const categories = {
+  vehicles: {
+    title: "Vehicles",
+    page: "vehicles.html",
+    icon: "🛵",
+    blurb: "Electric bikes, scooters, ATVs, jeeps and compact cars — clean, quiet mobility for city and country.",
+    items: ["electric_fatbike", "electric_fatbike_folding", "electric_scooter", "electric_cargo_bike", "atv_vehicle",
+            "4wd_land_rover", "electric_bike", "electric_moped_car", "jeep_willy_type", "jeep_3seater", "cross_rider_car"]
+  },
+  electronics: {
+    title: "Electronics & Gadgets",
+    page: "electronics.html",
+    icon: "📸",
+    blurb: "Drones, robots, solar gear, security and everyday tech gadgets.",
+    items: ["drone_camera", "robots", "solar_products", "batteries_chargers", "alarm_systems", "digital_clock",
+            "disco_lights", "dvd_player"]
+  },
+  toys_sports: {
+    title: "Toys & Sports",
+    page: "toys_sports.html",
+    icon: "🏎️",
+    blurb: "RC cars and tanks, ride-on electric toys for kids, and games for the whole family.",
+    items: ["remote_control_cars", "rc_tank", "electric_cars_kids", "electric_atv_kids", "billiard_table"]
+  },
+  home_garden: {
+    title: "Home & Garden",
+    page: "home_garden.html",
+    icon: "🌿",
+    blurb: "Garden machines, aquarium equipment, outdoor gear and seasonal decorations.",
+    items: ["lawn_mower", "aquarium_equipment", "compass", "christmas_tree"]
+  }
+};
+
+const featuredProducts = ["electric_scooter", "drone_camera", "atv_vehicle", "remote_control_cars"];
+
+Object.entries(categories).forEach(([key, cat]) => {
+  cat.items.forEach(id => {
+    if (products[id]) products[id].category = key;
+  });
+});

@@ -1,56 +1,108 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact - Arngren</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="assets/styles.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
-  <header class="bg-blue-500 text-white p-4">
-    <div class="container mx-auto flex justify-between items-center">
-      <a href="redesigned_arngren_fixed.html" class="text-2xl font-bold">Arngren.net</a>
-      <nav>
-        <a href="vehicles.html" class="px-4">Vehicles</a>
-        <a href="electronics.html" class="px-4">Electronics & Gadgets</a>
-        <a href="toys_sports.html" class="px-4">Toys & Sports</a>
-        <a href="contact.html" class="px-4">Contact</a>
-      </nav>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container mx-auto">
+    <section class="page-intro">
+      <p class="eyebrow">✉️ Get in touch</p>
+      <h1>Contact &amp; Environmental Information</h1>
+      <p>Reach us for inquiries, product support, or information about electronic product disposal and recycling.</p>
+    </section>
+
+    <div class="two-col">
+      <div class="panel">
+        <h2 class="text-2xl font-bold mb-4">Send us a message</h2>
+        <form id="contact-form" class="form-grid" novalidate>
+          <div>
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+            <p class="error" hidden>Please enter your name.</p>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+            <p class="error" hidden>Please enter a valid email address.</p>
+          </div>
+          <div>
+            <label for="topic">Topic</label>
+            <select id="topic" name="topic">
+              <option>Product question</option>
+              <option>Order &amp; delivery</option>
+              <option>Support &amp; repairs</option>
+              <option>Recycling / EE waste</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required minlength="10"></textarea>
+            <p class="error" hidden>Please write at least 10 characters.</p>
+          </div>
+          <button type="submit" class="btn-primary">Send message</button>
+        </form>
+        <div id="form-success" class="empty-state" hidden>
+          <p class="text-5xl mb-4">✅</p>
+          <h3 class="text-xl font-bold mb-2">Thanks for reaching out!</h3>
+          <p>This is a demo site, so your message wasn't actually sent. For real inquiries, use the contact details here.</p>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="panel">
+          <h2 class="text-2xl font-bold mb-3">Contact Information</h2>
+          <ul class="space-y-2">
+            <li><strong>Email:</strong> frithjof@arngren.net</li>
+            <li><strong>Telephone:</strong> +47-22419666</li>
+            <li><strong>Mobile:</strong> 92060873</li>
+            <li><strong>Skype:</strong> arngren.net</li>
+            <li><strong>Office Address:</strong> Frithjof Arngren, Arngren Sky Commuter AS, Sondreveien 3k (Smestad), 0378 Oslo, Norway.</li>
+          </ul>
+        </div>
+
+        <div id="recycling" class="panel" style="background:#ecfdf5">
+          <h2 class="text-2xl font-bold text-green-700 mb-3">♻️ Environmental Responsibility</h2>
+          <p>We accept your old, small electronics and hobby products (EE waste) for free recycling.</p>
+          <p class="mt-2">Send or deliver your products to our office address above.</p>
+          <p class="mt-4 font-semibold">Battery Disposal Information:</p>
+          <ul class="list-disc pl-6">
+            <li>You can dispose of regular batteries with your household waste.</li>
+            <li>Button cells and rechargeable batteries must be delivered to a dealer or municipal recycling station.</li>
+          </ul>
+          <p class="mt-4 font-semibold">Membership:</p>
+          <p>We are a member of RENAS, Norway's leading energy return company.</p>
+        </div>
+      </div>
     </div>
-  </header>
+  </main>
 
-  <section class="container mx-auto py-10">
-    <h2 class="text-4xl font-bold mb-6">Contact & Environmental Information</h2>
-    <p class="mb-4">You can reach us for inquiries, product support, or any information regarding electronic product disposal and recycling.</p>
-    
-    <div class="bg-white shadow-lg rounded p-6 mb-6">
-      <h3 class="text-2xl font-semibold">Contact Information</h3>
-      <ul class="list-disc pl-6 my-3">
-        <li><strong>Email:</strong> frithjof@arngren.net</li>
-        <li><strong>Telephone:</strong> +47-22419666</li>
-        <li><strong>Mobile:</strong> 92060873</li>
-        <li><strong>Skype:</strong> arngren.net</li>
-        <li><strong>Office Address:</strong> Frithjof Arngren, Arngren Sky Commuter AS, Sondreveien 3k (Smestad), 0378 Oslo, Norway.</li>
-      </ul>
-    </div>
+  <div id="site-footer"></div>
 
-    <div class="bg-green-100 p-6 rounded shadow">
-      <h3 class="text-2xl font-semibold text-green-700">Environmental Responsibility</h3>
-      <p class="mt-2">We accept your old, small electronics and hobby products (EE waste) for free recycling.</p>
-      <p class="mt-2">Send or deliver your products to our office address mentioned above.</p>
-      <p class="mt-4 font-semibold">Battery Disposal Information:</p>
-      <ul class="list-disc pl-6">
-        <li>You can dispose of regular batteries with your household waste.</li>
-        <li>Button cells and rechargeable batteries must be delivered to dealer or municipal recycling stations.</li>
-      </ul>
-      <p class="mt-4 font-semibold">Membership:</p>
-      <p>We are a member of RENAS, Norway's leading energy return company.</p>
-    </div>
-  </section>
-
-  <footer class="bg-gray-800 text-white text-center p-4">
-    &copy; 2025 Arngren.net | All Rights Reserved
-  </footer>
-
+  <script src="products.js"></script>
+  <script src="assets/site.js"></script>
+  <script>
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      let valid = true;
+      form.querySelectorAll('input, textarea').forEach(field => {
+        const error = field.parentElement.querySelector('.error');
+        const ok = field.checkValidity() && field.value.trim() !== '';
+        if (error) error.hidden = ok;
+        field.setAttribute('aria-invalid', !ok);
+        if (!ok && valid) { field.focus(); valid = false; }
+      });
+      if (!valid) return;
+      form.hidden = true;
+      document.getElementById('form-success').hidden = false;
+    });
+  </script>
 </body>
 </html>

@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Shopping Cart - Arngren.net</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shopping Cart - Arngren.net</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="assets/styles.css" rel="stylesheet">
 </head>
+<body>
+  <div id="site-header"></div>
 
-<body class="bg-gray-100">
+  <main class="container mx-auto">
+    <section class="page-intro">
+      <h1>Your Cart</h1>
+      <p><a href="index.html#shop" class="text-blue-600 underline">← Continue shopping</a></p>
+    </section>
 
-    <header class="bg-white shadow p-4 flex justify-between items-center">
-        <h1 class="text-3xl font-bold text-blue-500">Your Cart</h1>
-        <a href="arngren_final_integrated.html" class="text-blue-500 underline">Continue Shopping</a>
-    </header>
+    <div id="cart-container"></div>
+  </main>
 
-    <main class="container mx-auto p-6">
-        <div id="cart-container" class="bg-white p-4 rounded shadow">
-            <!-- Cart items will be dynamically added here -->
-        </div>
-    </main>
+  <div id="site-footer"></div>
 
-    <script src="cart.js"></script>
+  <script src="products.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="cart.js"></script>
 </body>
-
 </html>
