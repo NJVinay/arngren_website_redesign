@@ -3,45 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Product Details - Arngren</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Product — Arngren</title>
+  <meta name="theme-color" content="#f5f4f0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="assets/styles.css" rel="stylesheet">
 </head>
 <body>
   <div id="site-header"></div>
 
-  <main class="container mx-auto">
-    <nav id="breadcrumbs" class="breadcrumbs" aria-label="Breadcrumb"></nav>
+  <main class="wrap">
+    <nav id="breadcrumbs" class="crumbs" aria-label="Breadcrumb"></nav>
 
-    <article id="product" class="panel product-detail">
-      <div class="media">
+    <article id="product" class="pdp">
+      <figure class="pdp-media">
         <img id="product-image" src="" alt="">
-      </div>
-      <div class="details">
-        <p id="product-category" class="eyebrow"></p>
-        <h1 id="product-name">Loading...</h1>
-        <p id="product-description" class="text-lg"></p>
+      </figure>
 
-        <h2>Key Features</h2>
-        <ul id="product-features"></ul>
+      <div class="pdp-info">
+        <span id="product-category" class="label"></span>
+        <h1 id="product-name" class="h1">Loading…</h1>
+        <p id="product-description" class="lead"></p>
 
-        <h2>Why Buy This Product?</h2>
-        <p id="product-usage"></p>
+        <p id="product-price" class="pdp-price" style="margin-top:24px"></p>
 
-        <div class="buy-row">
-          <span id="product-price" class="price text-3xl"></span>
+        <div class="pdp-buy">
           <div class="qty">
-            <button type="button" data-step="-1" aria-label="Decrease quantity">−</button>
+            <button type="button" data-step="-1" aria-label="Decrease quantity"><i data-icon="minus"></i></button>
             <input id="qty-input" type="number" value="1" min="1" max="99" aria-label="Quantity">
-            <button type="button" data-step="1" aria-label="Increase quantity">+</button>
+            <button type="button" data-step="1" aria-label="Increase quantity"><i data-icon="plus"></i></button>
           </div>
-          <button id="buy-button" type="button" class="btn-primary">Add to cart</button>
+          <button id="buy-button" type="button" class="btn btn-ink"><i data-icon="bag"></i>Add to cart</button>
         </div>
+
+        <div class="pdp-notes">
+          <div><i data-icon="truck"></i><span id="shipping-note">Free shipping on orders over $500</span></div>
+          <div><i data-icon="recycle"></i><span>Free take-back of your old electronics</span></div>
+        </div>
+
+        <section class="pdp-section">
+          <span class="label">Key features</span>
+          <ul id="product-features" class="spec-list"></ul>
+        </section>
+
+        <section class="pdp-section">
+          <span class="label">Why buy this</span>
+          <p id="product-usage"></p>
+        </section>
       </div>
     </article>
 
     <section id="related" class="section" hidden>
-      <h2 class="section-title">You might also like</h2>
+      <hr class="rule" style="margin-bottom:56px">
+      <div class="section-head">
+        <div>
+          <span class="label">More like this</span>
+          <h2 class="h2">You might also like</h2>
+        </div>
+        <a id="related-link" href="#" class="btn btn-line btn-sm">See all <i data-icon="arrow-right"></i></a>
+      </div>
       <div id="related-grid" class="product-grid"></div>
     </section>
   </main>

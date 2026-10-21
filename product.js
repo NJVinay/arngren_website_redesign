@@ -6,32 +6,38 @@ const product = Object.prototype.hasOwnProperty.call(products, productId) ? prod
 
 if (product) {
   const category = categories[product.category];
+  const price = parsePrice(product.price);
 
-  document.title = `${product.name} - Arngren`;
+  document.title = `${product.name} — Arngren`;
   document.getElementById('product-name').textContent = product.name;
   document.getElementById('product-description').textContent = product.description;
-  document.getElementById('product-price').textContent = product.price;
+  document.getElementById('product-price').textContent = formatPrice(price);
   document.getElementById('product-usage').textContent = product.usage;
+  document.getElementById('shipping-note').textContent = price >= FREE_SHIPPING_FROM
+    ? 'Ships free'
+    : `Free shipping on orders over ${formatPrice(FREE_SHIPPING_FROM)}`;
 
   const image = document.getElementById('product-image');
   image.src = product.image;
   image.alt = product.name;
 
   document.getElementById('product-features').innerHTML =
-    product.detailedFeatures.map(item => `<li>${escapeHtml(item)}</li>`).join('');
+    product.detailedFeatures.map(item => `<li>${icon('check')}<span>${escapeHtml(item)}</span></li>`).join('');
 
+  const sep = '<span aria-hidden="true">/</span>';
   document.getElementById('breadcrumbs').innerHTML =
-    `<a href="index.html">Home</a> / ` +
-    (category ? `<a href="${category.page}">${escapeHtml(category.title)}</a> / ` : '') +
-    `<span>${escapeHtml(product.name)}</span>`;
+    `<a href="index.html">Home</a>${sep}` +
+    (category ? `<a href="${category.page}">${escapeHtml(category.title)}</a>${sep}` : '') +
+    `<span aria-current="page">${escapeHtml(product.name)}</span>`;
 
   if (category) {
-    document.getElementById('product-category').textContent = `${category.icon} ${category.title}`;
+    document.getElementById('product-category').textContent = category.title;
 
     // Related products from the same category
     const related = category.items.filter(id => id !== productId).slice(0, 4);
     if (related.length) {
       renderProductGrid(document.getElementById('related-grid'), related);
+      document.getElementById('related-link').href = category.page;
       document.getElementById('related').hidden = false;
     }
   }
@@ -51,8 +57,10 @@ if (product) {
   });
 } else {
   document.querySelector('main').innerHTML = `
-    <div class="panel empty-state" style="margin-top:48px">
-      <h1 class="text-3xl font-bold mb-2">Product not found</h1>
-      <p>We couldn't find that product. <a href="index.html#shop" class="text-blue-600 underline">Browse all products</a>.</p>
+    <div class="empty" style="margin-top:48px">
+      <div class="empty-icon">${icon('search')}</div>
+      <h1 class="h3">Product not found</h1>
+      <p class="muted">That product doesn't exist or has been removed.</p>
+      <a href="index.html#shop" class="btn btn-ink">Browse all products ${icon('arrow-right', 'icon-arrow')}</a>
     </div>`;
 }

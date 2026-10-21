@@ -30,9 +30,9 @@ This project is a complete redesign of an e-commerce website, transforming it in
   - Pricing information
   - Quantity selector, breadcrumbs and related products
 - **Modern UI/UX**:
-  - Animated gradient backgrounds
-  - Hover effects and smooth transitions
-  - Card-based product displays
+  - Restrained Nordic-tech look: warm paper, ink type, a single volt accent
+  - Geist / Geist Mono typography, hairline borders, line icons
+  - Product photos fill their tile; cut-outs sit centred on white
   - Shared sticky header with a mobile hamburger menu
   - Toast notifications instead of browser alerts
   - Respects `prefers-reduced-motion`
@@ -43,7 +43,7 @@ This project is a complete redesign of an e-commerce website, transforming it in
 - **HTML5**: Semantic markup structure
 - **CSS3**: Custom animations and styling
 - **JavaScript (ES6+)**: Interactive functionality and cart management
-- **Tailwind CSS**: Utility-first CSS framework for styling
+- **Custom CSS design system**: `assets/styles.css` (tokens, components, no framework)
 - **localStorage API**: Client-side data persistence for shopping cart
 
 ## 📁 Project Structure
@@ -119,11 +119,11 @@ npx http-server
 
 ## 🎨 Design Features
 
-- **Animated Gradient Background**: Smooth, flowing gradient animation
-- **Hover Effects**: Interactive card animations on hover
-- **Responsive Cards**: Equal-height cards with consistent spacing
-- **Modern Color Scheme**: Clean and professional color palette
-- **Image Optimization**: Properly sized and contained images
+- **Palette**: warm off-white paper (`#f5f4f0`), near-black ink (`#111110`) and one volt accent (`#d2f34c`) used sparingly
+- **Typography**: Geist for UI and headings, Geist Mono for labels, prices and specs
+- **Structure over decoration**: hairline borders and whitespace instead of gradients and drop shadows
+- **Smart image tiles**: each product image is sampled once — full photos fill their tile, cut-outs sit centred on white
+- **Motion**: subtle hover and scroll-reveal transitions, disabled under `prefers-reduced-motion`
 
 ## 🔧 Customization
 
@@ -147,7 +147,7 @@ Then add the product id to the `items` list of a category in the `categories` ob
 ### Modifying Styles
 
 - Shared styles live in `assets/styles.css`
-- Tailwind CSS classes can be adjusted directly in the HTML
+- Colours, type and radii are CSS variables at the top of `assets/styles.css`
 - Animation durations and effects can be modified in the CSS
 
 ## 📱 Browser Support
@@ -190,7 +190,7 @@ Email: jv5102003@gmail.com
 
 ## 🙏 Acknowledgments
 
-- Tailwind CSS for the utility-first CSS framework
+- [Geist](https://vercel.com/font) typeface via Google Fonts
 - Inspiration from modern e-commerce platforms
 - Original Arngren.net concept
 

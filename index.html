@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Arngren.net — electric vehicles, drones, gadgets, toys and hobby products from Oslo, Norway.">
-  <title>Arngren.net - Electric Vehicles, Gadgets & More</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta name="description" content="Arngren — electric vehicles, drones, gadgets and hobby gear, shipped from Oslo, Norway.">
+  <meta name="theme-color" content="#f5f4f0">
+  <title>Arngren — Electric vehicles &amp; gadgets from Oslo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="assets/styles.css" rel="stylesheet">
 </head>
 <body>
@@ -13,42 +16,103 @@
 
   <main>
     <section class="hero">
-      <div class="hero-content">
-        <h1>Discover the Future of Mobility</h1>
-        <p>Eco-friendly electric vehicles, drones, gadgets &amp; more — delivered from Oslo.</p>
-        <div class="hero-actions">
-          <a href="#shop" class="btn-primary btn-lg">Shop all products</a>
-          <a href="vehicles.html" class="btn-ghost">Browse vehicles</a>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div>
+            <span class="label hero-eyebrow">Electric mobility · Oslo</span>
+            <h1 class="display">Go electric.<br>Everywhere.</h1>
+            <p class="lead">E-bikes, scooters, ATVs, drones and clever gadgets — picked for everyday use and shipped from our shop in Smestad.</p>
+            <div class="hero-actions">
+              <a href="#shop" class="btn btn-ink">Shop all products <i data-icon="arrow-right"></i></a>
+              <a href="vehicles.html" class="btn btn-line">Explore vehicles</a>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div><strong id="stat-products">28</strong><span class="label">Products</span></div>
+            <div><strong id="stat-categories">4</strong><span class="label">Categories</span></div>
+            <div><strong id="stat-from">$49</strong><span class="label">From</span></div>
+          </div>
+        </div>
+        <figure class="hero-media">
+          <img src="images/arngrenbanner.webp" alt="Arngren's range of electric scooters, bikes, cars, drones and gadgets" fetchpriority="high">
+          <figcaption>
+            <div>
+              <span class="label">The full range</span>
+              <p>Ride, fly, build, play.</p>
+            </div>
+            <a href="#shop" class="btn btn-volt btn-sm">Browse <i data-icon="arrow-right"></i></a>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="props reveal">
+        <div class="prop"><i data-icon="truck"></i><div><h3>Free shipping over $500</h3><p>Flat $25 on smaller orders.</p></div></div>
+        <div class="prop"><i data-icon="recycle"></i><div><h3>Free EE-waste recycling</h3><p>Send us your old small electronics.</p></div></div>
+        <div class="prop"><i data-icon="shield"></i><div><h3>RENAS member</h3><p>Responsible electronics take-back in Norway.</p></div></div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <div>
+            <span class="label">Categories</span>
+            <h2 class="h2">Shop by category</h2>
+          </div>
+        </div>
+        <div id="category-tiles" class="cat-grid"></div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <div>
+            <span class="label">Featured</span>
+            <h2 class="h2">Most popular right now</h2>
+          </div>
+          <a href="#shop" class="btn btn-line btn-sm">View all <i data-icon="arrow-right"></i></a>
+        </div>
+        <div id="featured-grid" class="product-grid"></div>
+      </div>
+    </section>
+
+    <section id="shop" class="section" style="padding-top:0; scroll-margin-top:80px">
+      <div class="wrap">
+        <hr class="rule" style="margin-bottom:56px">
+        <div class="section-head">
+          <div>
+            <span class="label">Catalog</span>
+            <h2 class="h2">All products</h2>
+          </div>
+        </div>
+        <div class="toolbar">
+          <label class="search">
+            <span class="visually-hidden">Search products</span>
+            <i data-icon="search"></i>
+            <input type="search" id="searchInput" placeholder="Search e-bikes, drones, RC cars…" autocomplete="off">
+          </label>
+          <label><span class="visually-hidden">Sort by</span>
+            <select id="sort-select" class="select">
+              <option value="default">Sort: Featured</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+              <option value="name">Name A–Z</option>
+            </select>
+          </label>
+        </div>
+        <div id="category-chips" class="chips" role="group" aria-label="Filter by category"></div>
+        <p id="result-meta" class="label result-meta" aria-live="polite"></p>
+        <div id="all-grid" class="product-grid"></div>
+        <div id="no-results" class="empty" hidden>
+          <div class="empty-icon"><i data-icon="search"></i></div>
+          <h3 class="h3">No matches</h3>
+          <p class="muted">Try a different word or clear the category filter.</p>
+          <button type="button" id="reset-filters" class="btn btn-line btn-sm">Reset filters</button>
         </div>
       </div>
-    </section>
-
-    <section class="container mx-auto section">
-      <h2 class="section-title">Shop by Category</h2>
-      <div id="category-tiles" class="category-grid"></div>
-    </section>
-
-    <section class="container mx-auto section">
-      <h2 class="section-title">Featured Products</h2>
-      <div id="featured-grid" class="product-grid"></div>
-    </section>
-
-    <section id="shop" class="container mx-auto section">
-      <h2 class="section-title">All Products</h2>
-      <div class="toolbar">
-        <input type="search" id="searchInput" class="search-input" placeholder="Search products..." aria-label="Search products">
-        <label class="sort">Sort by
-          <select id="sort-select">
-            <option value="default">Featured</option>
-            <option value="price-asc">Price: low to high</option>
-            <option value="price-desc">Price: high to low</option>
-            <option value="name">Name</option>
-          </select>
-        </label>
-      </div>
-      <div id="category-chips" class="chips mb-6"></div>
-      <div id="all-grid" class="product-grid"></div>
-      <p id="no-results" class="empty-state panel" hidden>No products match your search.</p>
     </section>
   </main>
 
@@ -57,56 +121,67 @@
   <script src="products.js"></script>
   <script src="assets/site.js"></script>
   <script>
-    // Category tiles
-    document.getElementById('category-tiles').innerHTML = Object.values(categories).map(cat => `
-      <a href="${cat.page}" class="category-tile">
-        <div class="icon">${cat.icon}</div>
-        <h3>${escapeHtml(cat.title)}</h3>
-        <p>${escapeHtml(cat.blurb)}</p>
-        <span class="count">${cat.items.length} products →</span>
-      </a>`).join('');
+    const allIds = Object.keys(products);
 
+    // Hero stats from the catalog so they never go stale
+    document.getElementById('stat-products').textContent = allIds.length;
+    document.getElementById('stat-categories').textContent = Object.keys(categories).length;
+    document.getElementById('stat-from').textContent =
+      formatPrice(Math.min(...allIds.map(id => parsePrice(products[id].price))));
+
+    document.getElementById('category-tiles').innerHTML = Object.values(categories).map(categoryTile).join('');
     renderProductGrid(document.getElementById('featured-grid'), featuredProducts);
 
-    // All products with search, category filter and sorting
-    const allIds = Object.keys(products);
+    // All products: search, category filter and sort
     const state = { query: '', category: 'all', sort: 'default' };
-
     const chips = document.getElementById('category-chips');
-    chips.innerHTML = [['all', 'All'], ...Object.entries(categories).map(([k, c]) => [k, c.title])]
-      .map(([key, label]) => `<button type="button" class="chip${key === 'all' ? ' active' : ''}" data-cat="${key}">${escapeHtml(label)}</button>`)
+    const search = document.getElementById('searchInput');
+    const sort = document.getElementById('sort-select');
+
+    chips.innerHTML = [['all', 'All', allIds.length], ...Object.entries(categories).map(([k, c]) => [k, c.title, c.items.length])]
+      .map(([key, label, n]) => `<button type="button" class="chip${key === 'all' ? ' active' : ''}" data-cat="${key}" aria-pressed="${key === 'all'}">${escapeHtml(label)}<span class="count">${n}</span></button>`)
       .join('');
 
     function renderAll() {
-      let ids = allIds.filter(id => {
+      const ids = sortIds(allIds.filter(id => {
         const p = products[id];
         const matchesCat = state.category === 'all' || p.category === state.category;
-        const haystack = `${p.name} ${p.description}`.toLowerCase();
-        return matchesCat && haystack.includes(state.query);
-      });
-      if (state.sort === 'price-asc') ids.sort((a, b) => parsePrice(products[a].price) - parsePrice(products[b].price));
-      if (state.sort === 'price-desc') ids.sort((a, b) => parsePrice(products[b].price) - parsePrice(products[a].price));
-      if (state.sort === 'name') ids.sort((a, b) => products[a].name.localeCompare(products[b].name));
+        return matchesCat && `${p.name} ${p.description}`.toLowerCase().includes(state.query);
+      }), state.sort);
 
       renderProductGrid(document.getElementById('all-grid'), ids);
       document.getElementById('no-results').hidden = ids.length > 0;
+      document.getElementById('result-meta').textContent = `Showing ${ids.length} of ${allIds.length}`;
     }
 
-    document.getElementById('searchInput').addEventListener('input', e => {
-      state.query = e.target.value.trim().toLowerCase();
-      renderAll();
-    });
-    document.getElementById('sort-select').addEventListener('change', e => {
-      state.sort = e.target.value;
-      renderAll();
-    });
+    function setCategory(key) {
+      state.category = key;
+      chips.querySelectorAll('.chip').forEach(c => {
+        const on = c.dataset.cat === key;
+        c.classList.toggle('active', on);
+        c.setAttribute('aria-pressed', on);
+      });
+    }
+
+    search.addEventListener('input', e => { state.query = e.target.value.trim().toLowerCase(); renderAll(); });
+    sort.addEventListener('change', e => { state.sort = e.target.value; renderAll(); });
     chips.addEventListener('click', e => {
       const chip = e.target.closest('.chip');
       if (!chip) return;
-      state.category = chip.dataset.cat;
-      chips.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === chip));
+      setCategory(chip.dataset.cat);
       renderAll();
     });
+    document.getElementById('reset-filters').addEventListener('click', () => {
+      search.value = '';
+      state.query = '';
+      setCategory('all');
+      renderAll();
+      search.focus();
+    });
+
+    // Header search icon jumps here — focus the field
+    if (location.hash === '#shop') setTimeout(() => search.focus({ preventScroll: true }), 300);
+    window.addEventListener('hashchange', () => { if (location.hash === '#shop') search.focus({ preventScroll: true }); });
 
     renderAll();
   </script>
